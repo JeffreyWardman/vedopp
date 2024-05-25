@@ -1,0 +1,9 @@
+{
+    "debug.inlineValues": "on",
+    "editor.formatOnSave": true,
+    "git.autofetch": true,
+
+    "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build/compile_commands.json"
+}
