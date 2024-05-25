@@ -1,0 +1,7 @@
+Language: Cpp
+BasedOnStyle: Google
+ColumnLimit: 140
+BreakBeforeBraces: Allman
+IndentWidth: 4
+NamespaceIndentation: All
+AlignTrailingComments: true
