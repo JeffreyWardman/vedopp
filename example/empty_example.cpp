@@ -3,6 +3,7 @@
 
 auto main() -> int
 {
-    std::cout << "Hello, world!" << std::endl;
+    std::cout << "C++ Standard version: " << __cplusplus << std::endl;
+
     return 0;
 }

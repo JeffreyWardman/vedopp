@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.24)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -29,6 +29,8 @@ endif()
 add_library(
     vedo
     src/main.cpp
+    src/core/common_algorithms.cpp
+    src/core/data_helper_array.cpp
 )
 target_include_directories(
     vedo ${warning_guard}
@@ -36,7 +38,6 @@ target_include_directories(
     "\$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>"
 )
 
-include(cmake/third_party/nanobind.cmake)
 include(cmake/third_party/vtk.cmake)
 
 # ---- Examples ----
