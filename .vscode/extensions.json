@@ -7,6 +7,7 @@
         "ms-vscode.cmake-tools",
         "naumovs.color-highlight",
         "mhutchie.git-graph",
-        "sonarsource.sonarlint-vscode"
+        "sonarsource.sonarlint-vscode",
+        "vadimcn.vscode-lldb"
     ]
 }
