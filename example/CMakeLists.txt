@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")  # -Wpedantic
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 project(vedoExamples CXX)
 
@@ -8,18 +11,20 @@ include(../cmake/folders.cmake)
 
 if(PROJECT_IS_TOP_LEVEL)
   find_package(vedo REQUIRED)
+  find_package(VTK REQUIRED)  # Assuming VTK is also required
 endif()
 
 add_custom_target(run-examples)
 
 function(add_example NAME)
   add_executable("${NAME}" "${NAME}.cpp")
-  target_link_libraries("${NAME}" PRIVATE vedo)
+  target_link_libraries("${NAME}" PRIVATE vedo ${VTK_LIBRARIES})
   target_compile_features("${NAME}" PRIVATE cxx_std_23)
   add_custom_target("run_${NAME}" COMMAND "${NAME}" VERBATIM)
   add_dependencies("run_${NAME}" "${NAME}")
   add_dependencies(run-examples "run_${NAME}")
 endfunction()
 
-add_example(empty_example)
+add_example(cpp_version)
+add_example(load_file)
 add_folders(Example)

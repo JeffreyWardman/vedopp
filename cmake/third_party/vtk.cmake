@@ -25,6 +25,26 @@ FetchContent_Declare(
 
 find_package(VTK REQUIRED COMPONENTS
   CommonCore
+  CommonColor
+  CommonDataModel
+  IOPLY
+  IOGeometry
+  RenderingCore
+  RenderingOpenGL2
+
+  FiltersSources
+  FiltersGeneral
+  InteractionStyle
+  RenderingAnnotation
+
+
+  # FiltersStatistics
+  # CommonTransforms
+  # FiltersCore
+  # FiltersGeometry
+  # FiltersModeling
+  # InteractionWidgets
+  # RenderingFreeType
 )
 
 
