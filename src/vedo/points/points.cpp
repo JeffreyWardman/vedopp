@@ -4,8 +4,10 @@
 #include <vtkProperty.h>
 #include <vtkSmartPointer.h>
 
+#include <array>
 #include <memory>
 #include <string_view>
+#include <vector>
 
 #include "../file_io/reader.h"
 #include "../types.h"
@@ -22,6 +24,18 @@ namespace vedo::points
     Points::Points(std::string_view filename)
     {
         Dataset dataset = file_io::reader::load(filename);
+        this->Initialize(dataset);
+    }
+    Points::Points(const std::vector<std::array<double, 3>>& points)
+    {
+        Dataset datset = Dataset::New();
+        Vertices vertices = Vertices::New();
+
+        for (const auto& point : points)
+        {
+            vertices->InsertNextPoint(point.data());
+        }
+        dataset->SetPoints(vertices);
         this->Initialize(dataset);
     }
 
@@ -57,29 +71,5 @@ namespace vedo::points
 
         this->dataset = vtkPolyData::SafeDownCast(this->mapper->GetInput());
         this->transform = Transform::New();
-    }
-
-    auto Points::copy(bool deep) -> Points
-    {
-        Dataset datasetCopy = Dataset::New();
-        Transform transformCopy = Transform::New();
-
-        if (deep)
-        {
-            datasetCopy->DeepCopy(this->dataset);
-            transformCopy->DeepCopy(this->transform);
-        }
-        else
-        {
-            datasetCopy->ShallowCopy(this->dataset);
-            transformCopy->DeepCopy(this->transform);
-        }
-
-        Points pointsCopy = Points(datasetCopy);
-        pointsCopy.name = this->name;
-        pointsCopy.filename = this->filename;
-        pointsCopy.transform->DeepCopy(this->transform);
-        pointsCopy.properties->DeepCopy(this->properties);
-        return pointsCopy;
     }
 }  // namespace vedo::points

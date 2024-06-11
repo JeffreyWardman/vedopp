@@ -34,6 +34,17 @@ namespace vedo::core
     }
 
     template <typename Derived>
+    std::array<double, 3> PointAlgorithms<Derived>::origin()
+    {
+        std::array<double, 6> bounds = static_cast<Derived&>(*this)->bounds();
+        std::array<double, 3> centroid;
+        centroid[0] = (bounds[0] + bounds[1]) / 2.0;
+        centroid[1] = (bounds[2] + bounds[3]) / 2.0;
+        centroid[2] = (bounds[4] + bounds[5]) / 2.0;
+        return centroid;
+    }
+
+    template <typename Derived>
     Derived& PointAlgorithms<Derived>::rotate(double angle, const std::array<double, 3>& axis, const std::array<double, 3>& point, bool rad)
     {
         if (!rad) angle = vtkMath::RadiansFromDegrees(angle);

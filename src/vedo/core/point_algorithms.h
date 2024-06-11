@@ -3,15 +3,17 @@
 #include <array>
 
 #include "../types.h"
+#include "common_algorithms.h"
 
 namespace vedo::core
 {
     template <typename Derived>
-    class PointAlgorithms
+    class PointAlgorithms : public CommonAlgorithms<Derived>
     {
     public:
         Derived& apply_transform(Transform LT, bool deep_copy = true);
 
+        std::array<double, 3> origin();
         Derived& rotate(double angle,
                         const std::array<double, 3>& axis = {1.0, 0.0, 0.0},
                         const std::array<double, 3>& point = {0.0, 0.0, 0.0},

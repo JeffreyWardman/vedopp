@@ -30,11 +30,11 @@ set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/vedo)
 add_library(
     vedo
     STATIC
-    ${SOURCE_DIR}/core/common_algorithms.cpp
     ${SOURCE_DIR}/core/data_array_helper.cpp
     ${SOURCE_DIR}/core/point_algorithms.cpp
     ${SOURCE_DIR}/file_io/helpers.cpp
     ${SOURCE_DIR}/file_io/reader.cpp
+    ${SOURCE_DIR}/mesh/mesh.cpp
     ${SOURCE_DIR}/plotter/plotter.cpp
     ${SOURCE_DIR}/plotter/show.cpp
     ${SOURCE_DIR}/points/points.cpp

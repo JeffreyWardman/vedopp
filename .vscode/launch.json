@@ -3,7 +3,31 @@
     "configurations": [
       {
         "name": "Debug (Example - Mac)",
-        "type": "lldb", // "cppdbg",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/example/mesh/plot_wireframe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "preLaunchTask": "build",
+        "logging": {
+          "engineLogging": false,
+          "trace": true,
+          "traceResponse": true
+      },
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ]
+      },
+      {
+        "name": "Debug (Example: Load file - Mac)",
+        "type": "lldb",
         "request": "launch",
         "program": "${workspaceFolder}/build/example/load_file",
         "args": [],

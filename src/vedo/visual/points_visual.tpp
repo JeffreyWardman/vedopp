@@ -1,4 +1,3 @@
-
 #include <array>
 
 namespace vedo::visual
@@ -12,7 +11,7 @@ namespace vedo::visual
     template <typename Derived>
     Derived& PointsVisual<Derived>::c(const std::array<double, 3>& value)
     {
-        return this->color(value);
+        return static_cast<Derived&>(*this)->color(value);
     }
 
 }  // namespace vedo::visual
