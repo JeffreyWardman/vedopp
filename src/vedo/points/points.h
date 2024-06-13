@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vtkPolyDataMapper.h>
 #include <vtkProperty.h>
 #include <vtkSmartPointer.h>

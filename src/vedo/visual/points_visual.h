@@ -10,7 +10,7 @@ namespace vedo::visual
     class PointsVisual : public CommonVisual<Derived>
     {
     public:
-        std::array<double, 3> color() { return this->properties->GetColor(); }
+        std::array<double, 3> color() { return static_cast<Derived&>(*this)->properties->GetColor(); }
         std::array<double, 3> c() const { return color(); }
         Derived& color(const std::array<double, 3>& value);
         Derived& c(const std::array<double, 3>& value);

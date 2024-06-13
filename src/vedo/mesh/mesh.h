@@ -19,7 +19,8 @@ namespace vedo::mesh
     {
     public:
         using vedo::points::Points::Points;  // Inherit constructors from vedo::points::Points
+
         Mesh(const std::vector<std::array<double, 3>>& points, const std::vector<std::array<int, 3>>& faces);
-        void show();
+        using vedo::visual::MeshVisual<Mesh>::show;
     };
 }  // namespace vedo::mesh

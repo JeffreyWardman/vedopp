@@ -7,11 +7,9 @@
 
 #include <array>
 #include <memory>
-#include <string_view>
 #include <vector>
 
-#include "../file_io/reader.h"
-#include "../plotter/show.h"
+#include "../points/points.h"
 #include "../types.h"
 #include "../visual/mesh_visual.h"
 
@@ -19,7 +17,7 @@ namespace vedo::mesh
 {
     Mesh::Mesh(const std::vector<std::array<double, 3>>& points, const std::vector<std::array<int, 3>>& faces)
     {
-        Dataset datset = Dataset::New();
+        Dataset dataset = Dataset::New();
         Vertices vertices = Vertices::New();
 
         // Set points
@@ -43,6 +41,4 @@ namespace vedo::mesh
 
         this->Initialize(dataset);
     }
-
-    void Mesh::show() { vedo::plotter::show(this->dataset); }
 }  // namespace vedo::mesh

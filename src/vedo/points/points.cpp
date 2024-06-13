@@ -19,22 +19,23 @@ namespace vedo::points
         this->Initialize();
         this->mapper->SetInputData(this->dataset);
     }
-    // TODO pass in array of points
 
     Points::Points(std::string_view filename)
     {
         Dataset dataset = file_io::reader::load(filename);
         this->Initialize(dataset);
     }
+
     Points::Points(const std::vector<std::array<double, 3>>& points)
     {
-        Dataset datset = Dataset::New();
+        Dataset dataset = Dataset::New();
         Vertices vertices = Vertices::New();
 
         for (const auto& point : points)
         {
             vertices->InsertNextPoint(point.data());
         }
+
         dataset->SetPoints(vertices);
         this->Initialize(dataset);
     }

@@ -10,7 +10,8 @@ auto main() -> int
 {
     vedo::points::Points points = vedo::points::Points("data/dragon.ply");
     auto numPoints = static_cast<int>(points.dataset->GetNumberOfPoints());
-    points.show();
     fmt::print("Number of points is {}\n", numPoints);
+
+    points.show();
     return 0;
 }
