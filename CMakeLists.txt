@@ -5,7 +5,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")  # -Wpedantic
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
@@ -24,20 +24,28 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
-# ---- Declare library ----
 
+# ---- Declare library ----
+set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/vedo)
 add_library(
     vedo
-    src/main.cpp
-    src/core/common_algorithms.cpp
-    src/core/data_helper_array.cpp
+    STATIC
+    ${SOURCE_DIR}/file_io/helpers.cpp
+    ${SOURCE_DIR}/file_io/reader.cpp
+    ${SOURCE_DIR}/mesh/mesh.cpp
+    ${SOURCE_DIR}/plotter/plotter.cpp
+    ${SOURCE_DIR}/plotter/show.cpp
+    ${SOURCE_DIR}/points/points.cpp
+
 )
 target_include_directories(
     vedo ${warning_guard}
     PUBLIC
     "\$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>"
 )
+target_include_directories(vedo PUBLIC /opt/homebrew/include)
 
+include(cmake/third_party/fmt.cmake)
 include(cmake/third_party/vtk.cmake)
 
 # ---- Examples ----
