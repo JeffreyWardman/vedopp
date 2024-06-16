@@ -26,10 +26,10 @@ install_release:
 	cmake --install release
 
 run_example:
-	./build/example/empty_example
+	./build/example/example/empty_example
 
 run_test:
-	./build/test/vedo_test
+	./build/test/test/vedo_test
 
 run_docs:
 	doxygen build/docs/Doxyfile
