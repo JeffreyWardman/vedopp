@@ -34,6 +34,7 @@ find_package(VTK REQUIRED COMPONENTS
 
   FiltersSources
   FiltersGeneral
+  FiltersGeometry
   InteractionStyle
   RenderingAnnotation
 

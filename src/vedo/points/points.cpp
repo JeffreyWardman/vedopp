@@ -45,32 +45,33 @@ namespace vedo::points
     void Points::Initialize()
     {
         this->actor = Actor::New();
-        this->properties = this->actor->GetProperty();
         this->mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
         this->dataset = Dataset::New();
         this->transform = Transform::New();
         this->actor->SetMapper(this->mapper);
         this->mapper->SetInputData(this->dataset);
+        this->properties = this->actor->GetProperty();
+        this->properties_backface = this->actor->GetBackfaceProperty();
     }
 
     void Points::Initialize(Dataset dataset)
     {
         this->actor = Actor::New();
-        this->properties = this->actor->GetProperty();
         this->mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
         this->dataset = dataset;
         this->transform = Transform::New();
         this->actor->SetMapper(this->mapper);
         this->mapper->SetInputData(this->dataset);
+        this->properties = this->actor->GetProperty();
+        this->properties_backface = this->actor->GetBackfaceProperty();
     }
 
     void Points::Initialize(Actor actor)
     {
         this->actor = actor;
-        this->properties = this->actor->GetProperty();
         this->mapper = vtkPolyDataMapper::SafeDownCast(this->actor->GetMapper());
-
         this->dataset = vtkPolyData::SafeDownCast(this->mapper->GetInput());
         this->transform = Transform::New();
+        this->properties = this->actor->GetProperty();
     }
 }  // namespace vedo::points

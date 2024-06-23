@@ -10,7 +10,7 @@ namespace vedo::core
     class CoreUtilities
     {
     public:
-        Derived copy(bool deep = true) const;
+        Derived copy(bool deep = true);
     };
 }  // namespace vedo::core
 

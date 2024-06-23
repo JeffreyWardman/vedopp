@@ -39,4 +39,7 @@ add_example(cpp_version)
 add_example(load_file)
 
 add_example(mesh/plot_wireframe)
+
+add_example(shapes/convex_hull)
+
 add_folders(Example)

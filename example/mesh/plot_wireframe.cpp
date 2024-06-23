@@ -8,8 +8,8 @@
 auto main() -> int
 {
     vedo::mesh::Mesh mesh = vedo::mesh::Mesh("data/dragon.ply");
-    auto numPoints = static_cast<int>(mesh.dataset->GetNumberOfPoints());
-    auto numFaces = mesh.dataset->GetNumberOfCells();
+    auto numPoints = mesh.npoints();
+    auto numFaces = mesh.ncells();
     fmt::print("Number of points is {}\nNumber of faces is {}\n", numPoints, numFaces);
 
     mesh.wireframe(true).show();

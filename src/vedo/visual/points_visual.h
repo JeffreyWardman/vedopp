@@ -14,6 +14,10 @@ namespace vedo::visual
         std::array<double, 3> c() const { return color(); }
         Derived& color(const std::array<double, 3>& value);
         Derived& c(const std::array<double, 3>& value);
+        Derived& opacity(float alpha);
+        float opacity();
+        Derived& alpha(float alpha);
+        float alpha();
     };
 }  // namespace vedo::visual
 
