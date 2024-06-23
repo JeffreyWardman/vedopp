@@ -24,7 +24,6 @@
 
 namespace vedo::plotter
 {
-
     Plotter::Plotter(std::string_view title, const std::tuple<int, int> size)
     {
         this->title = title;
@@ -104,11 +103,31 @@ namespace vedo::plotter
 
     void Plotter::close()
     {
-        // this->widgets.clear();
+        // if (this->widgets)
+        // {
+        //     this->widgets->SetEnabled(false);
+        //     // this->widgets->SetInteractor(nullptr);
+        // }
 
-        this->renderer->RemoveAllViewProps();
-        this->window->Finalize();
-        this->interactor->TerminateApp();
+        // Clean up vtkRenderWindowInteractor
+        if (this->interactor)
+        {
+            this->interactor->SetRenderWindow(nullptr);  // Ensure interactor is detached from render window
+            this->interactor->TerminateApp();
+        }
+
+        // Clean up vtkRenderWindow
+        if (this->window)
+        {
+            this->window->Finalize();
+            this->window->SetInteractor(nullptr);
+        }
+
+        // Clean up vtkRenderer
+        if (this->renderer)
+        {
+            this->renderer->RemoveAllViewProps();
+        }
     }
 
     void Plotter::prepare_scene()
@@ -229,21 +248,21 @@ namespace vedo::plotter
         arrowSource->SetShaftRadius(0.01);
 
         // Compute the direction and length of the arrow
-        double direction[3] = {end[0] - start[0], end[1] - start[1], end[2] - start[2]};
-        double length = vtkMath::Norm(direction);
-        vtkMath::Normalize(direction);
+        std::array<double, 3> direction = {end[0] - start[0], end[1] - start[1], end[2] - start[2]};
+        double length = vtkMath::Norm(direction.data());
+        vtkMath::Normalize(direction.data());
 
         // Create a transform to position and scale the arrow
         Transform transform = Transform::New();
         transform->Translate(&start[0]);
 
         // Compute the rotation needed to align the arrow with the direction vector
-        double defaultDirection[3] = {1.0, 0.0, 0.0};  // Default arrow direction is along X axis
-        double rotationAxis[3];
-        vtkMath::Cross(defaultDirection, direction, rotationAxis);
-        double angle = vtkMath::DegreesFromRadians(acos(vtkMath::Dot(defaultDirection, direction)));
+        std::array<double, 3> defaultDirection = {1.0, 0.0, 0.0};  // Default arrow direction is along X axis
+        std::array<double, 3> rotationAxis;
+        vtkMath::Cross(defaultDirection.data(), direction.data(), rotationAxis.data());
+        double angle = vtkMath::DegreesFromRadians(acos(vtkMath::Dot(defaultDirection.data(), direction.data())));
 
-        transform->RotateWXYZ(angle, rotationAxis);
+        transform->RotateWXYZ(angle, rotationAxis.data());
         transform->Scale(length, length, length);
 
         // Apply the transform

@@ -36,7 +36,8 @@ add_library(
     ${SOURCE_DIR}/plotter/plotter.cpp
     ${SOURCE_DIR}/plotter/show.cpp
     ${SOURCE_DIR}/points/points.cpp
-
+    ${SOURCE_DIR}/shapes/shapes.cpp
+    ${SOURCE_DIR}/transformations/transformations.cpp
 )
 target_include_directories(
     vedo ${warning_guard}
@@ -46,6 +47,7 @@ target_include_directories(
 target_include_directories(vedo PUBLIC /opt/homebrew/include)
 
 include(cmake/third_party/fmt.cmake)
+include(cmake/third_party/eigen.cmake)
 include(cmake/third_party/vtk.cmake)
 
 # ---- Examples ----

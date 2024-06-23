@@ -33,6 +33,8 @@ namespace vedo::points
         std::string filename;
         Actor actor;
         vtkSmartPointer<vtkProperty> properties;
+        vtkSmartPointer<vtkProperty> properties_backface;
+
         vtkSmartPointer<vtkPolyDataMapper> mapper;
         Dataset dataset;
         Transform transform;

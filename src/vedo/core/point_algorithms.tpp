@@ -1,12 +1,31 @@
+#include <vtkCleanPolyData.h>
 #include <vtkMath.h>
 #include <vtkTransformPolyDataFilter.h>
 
 #include <array>
+#include <optional>
 
+#include "../transformations/transformations.h"
 #include "../types.h"
 
 namespace vedo::core
 {
+    template <typename Derived>
+    Derived& PointAlgorithms<Derived>::clean()
+    {
+        vtkSmartPointer<vtkCleanPolyData> cpd = vtkSmartPointer<vtkCleanPolyData>::New();
+        cpd->PointMergingOn();
+        cpd->ConvertLinesToPointsOff();
+        cpd->ConvertPolysToLinesOff();
+        cpd->ConvertStripsToPolysOff();
+        cpd->SetInputData(static_cast<Derived&>(*this).dataset);
+        cpd->Update();
+
+        static_cast<Derived&>(*this).dataset = cpd->GetOutput();
+
+        return static_cast<Derived&>(*this);
+    }
+
     template <typename Derived>
     Derived& PointAlgorithms<Derived>::apply_transform(Transform LT, bool deep_copy)
     {
@@ -58,16 +77,38 @@ namespace vedo::core
     }
 
     template <typename Derived>
-    Derived& PointAlgorithms<Derived>::rotate_x(double angle, bool rad)  //, around = nullptr)
+    Derived& PointAlgorithms<Derived>::rotate_x(double angle, bool rad, const std::optional<std::array<double, 3>>& around)
     {
         if (angle == 0)
         {
             return static_cast<Derived&>(*this);
         }
-        if (!rad) angle = vtkMath::RadiansFromDegrees(angle);
 
-        Transform LT = Transform::New();
-        LT->RotateX(angle);
+        vedo::transformations::LinearTransform LT = vedo::transformations::LinearTransform().rotate_x(angle, rad, around);
+        return static_cast<Derived&>(*this)->apply_transform(LT);
+    }
+
+    template <typename Derived>
+    Derived& PointAlgorithms<Derived>::rotate_y(double angle, bool rad, const std::optional<std::array<double, 3>>& around)
+    {
+        if (angle == 0)
+        {
+            return static_cast<Derived&>(*this);
+        }
+
+        vedo::transformations::LinearTransform LT = vedo::transformations::LinearTransform().rotate_y(angle, rad, around);
+        return static_cast<Derived&>(*this)->apply_transform(LT);
+    }
+
+    template <typename Derived>
+    Derived& PointAlgorithms<Derived>::rotate_z(double angle, bool rad, const std::optional<std::array<double, 3>>& around)
+    {
+        if (angle == 0)
+        {
+            return static_cast<Derived&>(*this);
+        }
+
+        vedo::transformations::LinearTransform LT = vedo::transformations::LinearTransform().rotate_z(angle, rad, around);
         return static_cast<Derived&>(*this)->apply_transform(LT);
     }
 }  // namespace vedo::core

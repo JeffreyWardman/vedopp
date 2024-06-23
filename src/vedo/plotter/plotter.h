@@ -20,12 +20,16 @@ namespace vedo::plotter
     class Plotter
     {
     public:
-        // Plotter::Plotter() { setup(); };
         Plotter(std::string_view title = "vedo", std::tuple<int, int> size = std::make_tuple(800, 600));
         void add(Actor actor);
         void add(const std::vector<Actor>& actors);
         void add(Dataset dataset);
         void add(const std::vector<Dataset>& datasets);
+        template <typename T>
+        void add(const T& obj)
+        {
+            this->add(obj.actor);
+        }
         void show();
         void show(Dataset dataset);
         void show(const std::vector<Dataset>& datasets);
@@ -34,7 +38,6 @@ namespace vedo::plotter
         void prepare_scene();
         auto createArrowActor(std::array<float, 3> start, std::array<float, 3> end, std::array<float, 3> color) -> Actor;
 
-    private:
         std::string title;
         std::tuple<int, int> size;
         vtkSmartPointer<vtkRenderWindow> window;
