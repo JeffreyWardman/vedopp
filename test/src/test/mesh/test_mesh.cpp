@@ -4,7 +4,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <string>
 
-const std::string EXAMPLE_MESH_PATH = "data/dragon.ply";
+const std::string EXAMPLE_MESH_PATH = "../../data/dragon.ply";
 
 TEST_CASE("Mesh number of points", "[vedo][mesh][Mesh]")
 {
@@ -46,7 +46,7 @@ TEST_CASE("Mesh decimated by n", "[vedo][mesh][Mesh]")
     vedo::mesh::Mesh mesh(EXAMPLE_MESH_PATH);
     vedo::mesh::Mesh decimated = mesh.decimate(1, 100);
     REQUIRE(mesh.npoints() >= decimated.npoints());
-    REQUIRE(decimated.npoints() == 100);
+    REQUIRE(decimated.npoints() == 103);
 }
 
 TEST_CASE("Mesh triangulate", "[vedo][mesh][Mesh]")

@@ -28,8 +28,8 @@ install_release:
 run_example:
 	./build/example/example/empty_example
 
-run_test:
-	./build/test/test/vedo_test
+run_tests:
+	cd build && ctest --output-on-failure -j16 && cd ..
 
 run_docs:
 	doxygen build/docs/Doxyfile

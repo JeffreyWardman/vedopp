@@ -52,4 +52,30 @@ namespace vedo::visual
         return static_cast<Derived&>(*this)->alpha();
     }
 
+    template <typename Derived>
+    int PointsVisual<Derived>::point_size()
+    {
+        return static_cast<Derived&>(*this)->properties->GetPointSize();
+    }
+
+    template <typename Derived>
+    int PointsVisual<Derived>::ps()
+    {
+        return static_cast<Derived&>(*this)->point_size();
+    }
+
+    template <typename Derived>
+    Derived& PointsVisual<Derived>::point_size(const int value)
+    {
+        static_cast<Derived&>(*this)->properties->SetRepresentationToPoints();
+        static_cast<Derived&>(*this)->properties->SetPointSize(value);
+        return static_cast<Derived&>(*this);
+    }
+
+    template <typename Derived>
+    Derived& PointsVisual<Derived>::ps(const int value)
+    {
+        return static_cast<Derived&>(*this)->point_size(value);
+    }
+
 }  // namespace vedo::visual

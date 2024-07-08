@@ -25,6 +25,7 @@ namespace vedo::points
         Points(std::string_view filename);
         Points(const std::vector<std::array<double, 3>>& points);
         Points(Dataset dataset);
+
         void Initialize();
         void Initialize(Dataset dataset);
         void Initialize(Actor actor);

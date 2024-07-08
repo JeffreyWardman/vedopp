@@ -25,6 +25,7 @@ namespace vedo::mesh
         using vedo::visual::MeshVisual<Mesh>::alpha;
 
         Mesh(const std::vector<std::array<double, 3>>& points, const std::vector<std::array<int, 3>>& faces);
+
         auto area() -> double;
         auto volume() -> double;
         auto thumbnail(double zoom = 1.25, std::pair<int, int> size = {200, 200}, double azimuth = 0.0, double elevation = 0.0) -> Image;

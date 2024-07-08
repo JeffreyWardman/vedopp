@@ -18,6 +18,10 @@ namespace vedo::visual
         float opacity();
         Derived& alpha(float alpha);
         float alpha();
+        Derived& point_size(int value);
+        int point_size();
+        Derived& ps(int value);
+        int ps();
     };
 }  // namespace vedo::visual
 

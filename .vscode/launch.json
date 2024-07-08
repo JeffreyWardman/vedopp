@@ -5,7 +5,7 @@
         "name": "Debug (Example - Mac)",
         "type": "lldb",
         "request": "launch",
-        "program": "${workspaceFolder}/build/example/example/mesh/plot_wireframe",
+        "program": "${workspaceFolder}/build/example/example/shapes/convex_hull",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",

@@ -5,8 +5,10 @@
 #include <iostream>
 #include <string>
 
+const std::string EXAMPLE_MESH_PATH = "../data/dragon.ply";
+
 TEST_CASE("Mesh loads", "[vedo][mesh][Mesh]")
 {
-    vedo::mesh::Mesh mesh("data/dragon.ply");
+    vedo::mesh::Mesh mesh(EXAMPLE_MESH_PATH);
     // REQUIRE(std::string("{= name =}") == exported.name());
 }
